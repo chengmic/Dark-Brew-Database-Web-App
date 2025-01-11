@@ -1,0 +1,59 @@
+<html>
+<head>
+    <title>Dark Brew Cafe</title>
+</head>
+
+<body>
+
+    <!-- DISPLAYS THE ROW THAT IS CURRENTLY BEING EDITED -->
+    <div>
+        <table border="1" cellpadding="5">
+            <caption> Editing User: </caption>
+            {% if Customers %}
+                <thead>
+                    <tr>
+                        {% for key in Customers[0].keys() %}
+                            <th>{{ key }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for customer in Customers %}
+                    <tr>
+                        {% for key in customer.keys() %}
+                            <td>{{customer[key]}}</td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+                    {% endfor %}
+            {% endif %}
+        </table>
+
+
+    <!-- EDIT CUSTOMERS FORM-->
+    <div id="edit">
+        <form id="editCustomer" action="/edit_customer/{{Customers[0].customer_id}}" method="POST">
+            <legend><strong>Edit Customer</strong></legend>
+            <fieldset>
+                <input type="hidden" value="{{Customers[0].customer_id}}" id="customer_id" name="customer_id" required>
+
+                <label for="first_name"> First Name </label>
+                <input type="text" value="{{Customers[0].first_name}}"  id="first_name" name="first_name" required>
+
+                <label for="last_name"> Last Name </label>
+                <input type="text" value="{{Customers[0].last_name}}" id="last_name" name="last_name" required>
+
+                <label for="email"> Email </label>
+                <input type="email" value="{{Customers[0].email}}" id="email" name="email" required>
+
+                <label for="birthdate"> Birthdate </label>
+                <input type="date" value="{{Customers[0].birthdate}}" id="birthdate" name="birthdate" required>
+            </fieldset>
+
+            <input type="submit" value="Edit Customer" name="edit_customer" class="btn btn-primary">
+            <a href='/customers'><input class="btn" type="button" value="cancel"></a>
+        </form>
+    </div>
+
+</html>

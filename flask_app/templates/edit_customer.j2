@@ -1,0 +1,64 @@
+<html>
+<head>
+    <link href="/static/style.css" rel="stylesheet" type="text/css" />
+    <title>Dark Brew Cafe</title>
+</head>
+
+
+<body>
+
+    <h2 class="center">Edit Customer</h1>
+
+    <!-- DISPLAYS THE ROW THAT IS CURRENTLY BEING EDITED -->
+    <div class="center">
+        <table border="1" cellpadding="5">
+            {% if Customers %}
+                <thead>
+                    <tr>
+                        <th>Customer ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Birthdate</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for customer in Customers %}
+                    <tr>
+                        {% for key in customer.keys() %}
+                            <td>{{customer[key]}}</td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+                    {% endfor %}
+            {% endif %}
+        </table>
+    </div>
+
+    <!-- EDIT CUSTOMERS FORM-->
+    <div id="edit" class="center">
+        <form id="editCustomer" action="/edit_customer/{{Customers[0].customer_id}}" method="POST">
+            <legend><strong>Edit Customer</strong></legend>
+            <fieldset>
+                <input type="hidden" value="{{Customers[0].customer_id}}" id="customer_id" name="customer_id" required>
+
+                <label for="first_name"> First Name </label>
+                <input type="text" value="{{Customers[0].first_name}}"  id="first_name" name="first_name" required>
+
+                <label for="last_name"> Last Name </label>
+                <input type="text" value="{{Customers[0].last_name}}" id="last_name" name="last_name" required>
+
+                <label for="email"> Email </label>
+                <input type="email" value="{{Customers[0].email}}" id="email" name="email" required>
+
+                <label for="birthdate"> Birthdate </label>
+                <input type="date" value="{{Customers[0].birthdate}}" id="birthdate" name="birthdate" required>
+            </fieldset>
+
+            <input type="submit" value="Edit Customer" name="edit_customer" class="btn btn-primary">
+            <a href='/customers'><input class="btn" type="button" value="Cancel"></a>
+        </form>
+    </div>
+
+</html>

@@ -1,0 +1,115 @@
+
+<html>
+<head>
+    <link href="/static/style.css" rel="stylesheet" type="text/css" />
+    <title>Dark Brew Cafe</title>
+
+    <script language="JavaScript">
+		function showform(dowhat) {
+			if (dowhat == 'update'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'delete'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'block';
+			}
+			else { //by default display browse and insert
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+		}
+    function updateOrder(order_id) { showform('update'); }
+    function deleteOrder(order_id) { showform ('delete'); }
+    function browseOrders() { showform ('browse'); }
+</script>
+</head>
+
+
+<body onload="browseOrders()">
+
+    <header>
+        <h1 class="heading">Dark Brew Cafe</h1>
+        <nav class="navigation">
+            <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/items">Items</a> | <a href="/locations">Locations</a> | <a href="/orders">Orders</a> | <a href="/order_details">Order Details</a>
+        </nav>
+    </header>
+    <h2 class="center">Orders</h2>
+
+    <!---- BROWSE -->
+    <div id ="browse" class="center">
+        <table border="1" cellpadding="10">
+        {% if Orders %}
+            <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Customer</th>
+                <th>Total</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for order in Orders %}
+            <tr>
+                {% for key in order.keys() %}
+                    <td>{{order[key]}}</td>
+                {% endfor %}
+
+                <!-- Create edit/delete buttons -->
+                <td><a href="/edit_order/{{order.order_id}}" class="btn btn-default">Edit</a></td>
+                <td><a href="/delete_order/{{order.order_id}}" class="btn btn-default">Delete</a></td>
+            </tr>
+            </tbody>
+            {% endfor %}
+        {% endif %} 
+        </table>
+    </div>
+
+
+    <!---- INSERT -->
+    <div id="insert" class="center">
+        <form method="POST" id="addOrder" action="/orders">
+            <legend><strong>Add Order</strong></legend>
+            <fieldset class="fields">
+                <label> Location </label>
+                
+                <select name="location_id" id="location_id" required>
+                    <option value = ""></option>
+                    {% for location in Locations %}
+                        <option value="{{location.location_id}}">{{location.location_name}}</option>
+                    {% endfor %}
+                </select>
+                
+
+                <label> Customer </label>
+                <select name ="customer_id" id="customer_id">
+                    <option value=""></option>
+                    {% for customer in Customers %}
+                        <option value="{{customer.customer_id}}">{{customer.first_name}} {{customer.last_name}}  {{customer.customer_id}}</option>
+                    {% endfor %}
+                </select>
+            </fieldset>
+
+            <input class="btn" type="submit" id="addOrder" value="Add Order" name="add_order">
+            </form> 
+    </div>
+
+    <div class="center">
+    <p>Notes:</p>
+    <p>Customers column is a NULLABLE FK.</p>
+    <p>Date initializes as the current date.</p>
+    <p>Total initializes as 0.00.</p>
+    <p>When an order is deleted, all associated rows in the Order Details table will also be deleted.</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<html>
+<head>
+    <link href="/static/style.css" rel="stylesheet" type="text/css" />
+    <title>Dark Brew Cafe</title>
+
+    <script language="JavaScript">
+		function showform(dowhat) {
+			if (dowhat == 'update'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'delete'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'block';
+			}
+			else { //by default display browse and insert
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+		}
+    function updateOrder_Detail(order_detail_id) { showform('update'); }
+    function deleteOrder_Detail(order_detail_id) { showform ('delete'); }
+    function browseOrder_Details() { showform ('browse'); }
+</script>
+</head>
+
+
+
+<body onload="browseOrder_Details()">
+    <header>
+        <h1 class="heading">Dark Brew Cafe</h1>
+        <nav class="navigation">
+            <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/items">Items</a> | <a href="/locations">Locations</a> | <a href="/orders">Orders</a> | <a href="/order_details">Order Details</a>
+        </nav>
+    </header>
+    <h2 class="center">Order Details</h2>
+    <!---- BROWSE -->
+    <div id ="browse" class="center">
+        <table border="1" cellpadding="10">
+        {% if Order_Details %}
+            <thead>
+            <tr>
+                <th>Detail ID</th>
+                <th>Order ID</th>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Unit Cost</th>
+                <th>Item Total</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for order_detail in Order_Details %}
+            <tr>
+                {% for key in order_detail.keys() %}
+                    <td>{{order_detail[key]}}</td>
+                {% endfor %}
+
+                <!-- Create edit/delete buttons -->
+                <td><a href="/edit_order_detail/{{order_detail.order_detail_id}}" class="btn btn-default">Edit</a></td>
+                <td><a href="/delete_order_detail/{{order_detail.order_detail_id}}" class="btn btn-default">Delete</a></td>
+
+
+            </tr>
+            </tbody>
+
+            {% endfor %}
+        {% endif %} 
+        </table>
+    </div>
+
+
+    <!---- INSERT -->
+    <div id="insert" class="center">
+        <form method="POST" id="addOrder_Detail" action="/order_details">
+            <legend><strong>Add Order Detail</strong></legend>
+            <fieldset class="fields">
+                <label> Order </label>
+                
+                <select name="order_id" id="order_id" required>
+                    <option value = ""></option>
+                    {% for order in Orders %}
+                        <option value="{{order.order_id}}">{{order.order_id}}</option>
+                    {% endfor %}
+                </select>
+                
+
+                <label> Item </label>
+                <select name ="item_id" id="item_id" required>
+                    <option value=""></option>
+                    {% for item in Items %}
+                        <option value="{{item.item_id}}">{{item.item_name}}</option>
+                    {% endfor %}
+                </select>
+
+                <label> Quantity</label>
+                    <input type="number" step="1" name="item_quantity" min="1" required>                
+            </fieldset>
+
+            <input class="btn" type="submit" id="addOrder_Detail" value="Add Order Detail" name="add_order_detail">
+            </form> 
+    </div>
+
+
+</body>
+</html>

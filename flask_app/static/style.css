@@ -1,0 +1,167 @@
+.center {
+  margin: 0 auto;
+  width: 80%;
+  padding: 10px
+}
+
+.heading {
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.navigatoin {
+  padding: 10px;
+}
+
+
+
+body {       
+  color:rgb(0, 0, 0);
+  background-color:rgb(234, 234, 234);
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:20px;
+  margin: auto;
+  position: relative;
+}
+
+
+/*  ----- Navigation ----- Override text links for navigation only.  */
+nav {
+  padding: 10px;
+  margin-bottom: 20px;
+  color:rgb(255, 255, 255);
+  background-color:rgb(57, 57, 57);
+  border: none;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:24px;
+  font-weight: normal;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+nav a {
+  color:rgb(255, 255, 255);
+  background-color:rgb(57, 57, 57);
+  border: none;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:24px;
+  font-weight: normal;
+  text-decoration: none;
+  vertical-align: middle;
+}
+nav a:hover {
+  color:rgb(0, 180, 108);
+  border: none;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:24px;
+  font-weight: normal;
+  text-decoration: underline;
+  vertical-align: middle;
+}
+
+/*  ----- Page layout blocks -----  */
+header {
+  color:rgb(0, 0, 0);
+  background-color:rgb(255, 255, 255);
+  border: none;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:25px;
+  font-weight: bold;
+  vertical-align: middle;
+
+}
+main {
+  color:rgb(0, 0, 0);
+  background-color:rgb(220, 245, 235);
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:18px;
+}
+
+footer {
+  color:rgb(0, 0, 0);
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:18px;
+}
+
+/*  ----- Table ----- */
+table {
+  border-collapse: collapse;
+  border-spacing: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+
+tr {
+  background-color: white;
+  color: rgb(0, 0, 0);
+  border-collapse: collapse;
+  border-spacing: 10px;
+  padding: 10px;
+}
+
+  tr:nth-child(even) {
+    background-color:rgb(255, 0, 0);
+  }
+
+
+th {
+  background-color:rgb(0, 180, 108);
+  color: rgb(255, 255, 255);
+  border-collapse: collapse;
+  border-spacing: 10px;
+  padding: 10px;
+}
+
+td {
+  color: rgb(0, 0, 0);
+  border: 1px, lightgrey;
+  border-collapse: collapse;
+  border-spacing: 10px;
+  padding: 10px;
+}
+
+/*  ----- Form ----- */
+legend{
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+form {
+  border: 1px solid;
+  background-color:rgb(255, 255, 255);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  padding: 2px;
+}
+
+button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  margin-top: 10px;
+  padding: 2px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+input {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  margin-left: 20px;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  padding: 2px;
+}
+
+select {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  margin-left: 20px;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  padding: 2px;
+}

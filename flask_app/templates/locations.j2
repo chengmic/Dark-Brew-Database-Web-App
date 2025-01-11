@@ -1,0 +1,92 @@
+<html>
+<head>
+    <link href="/static/style.css" rel="stylesheet" type="text/css" />
+    <title>Dark Brew Cafe</title>
+
+    <script language="JavaScript">
+		function showform(dowhat) {
+			if (dowhat == 'update'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'delete'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'block';
+			}
+			else { //by default display browse and insert
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+		}
+    function updateLocation(location_id) { showform('update'); }
+    function deleteLocation(location_id) { showform ('delete'); }
+    function browseLocations() { showform ('browse'); }
+</script>
+</head>
+
+
+
+
+
+<body onload="browseLocations()">
+    <header>
+        <h1 class="heading">Dark Brew Cafe</h1>
+        <nav class="navigation">
+            <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/items">Items</a> | <a href="/locations">Locations</a> | <a href="/orders">Orders</a> | <a href="/order_details">Order Details</a>
+        </nav>
+    </header>
+    <h2 class="center">Locations</h2>
+
+     <!---- BROWSE -->
+    <div id ="browse" class="center">
+        <table border="1" cellpadding="10">
+        {% if Locations %}
+            <thead>
+            <tr>
+                <th>Location ID</th>
+                <th>Name</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for location in Locations %}
+            <tr>
+                {% for key in location.keys() %}
+                    <td>{{location[key]}}</td>
+                {% endfor %}
+
+                <!-- Create edit/delete buttons -->
+                <td><a href="/edit_location/{{location.location_id}}" class="btn btn-default">Edit</a></td>
+                <td><a href="/delete_location/{{location.location_id}}" class="btn btn-default">Delete</a></td>
+            </tr>
+            </tbody>
+            {% endfor %}
+        {% endif %} 
+        </table>
+    </div>
+
+
+    <!---- INSERT -->
+    <div id="insert" class="center">
+        <form method="POST" id="addLocation" action="/locations">
+            <legend><strong>Add Location</strong></legend>
+            <fieldset class="fields">
+                <label> Location Name </label> <input type="text" name="location_name" required> *must be unique
+            </fieldset>
+                <input class="btn" type="submit" id="addLocation" value="Add Location" name="add_location">
+            </form> 
+    </div>
+
+    <div class="center">
+        <p> Note: When a location is deleted, all associated rows in the Orders table are also deleted.</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<html>
+<head>
+    <link href="/static/style.css" rel="stylesheet" type="text/css" />
+    <title>Dark Brew Cafe</title>
+</head>
+
+<body>
+    <h2 class="center">Edit Location</h2>
+    <!-- DISPLAYS THE ROW THAT IS CURRENTLY BEING EDITED -->
+    <div class="center">
+        <table border="1" cellpadding="5">
+            {% if Locations %}
+                <thead>
+                    <tr>
+                        {% for key in Locations[0].keys() %}
+                            <th>{{ key }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for location in Locations %}
+                    <tr>
+                        {% for key in location.keys() %}
+                            <td>{{location[key]}}</td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+                    {% endfor %}
+            {% endif %}
+        </table>
+    </div>
+
+
+    <!-- EDIT LOCATIONS FORM-->
+    <div id="edit" class="center">
+        <form id="editLocation" action="/edit_location/{{Locations[0].location_id}}" method="POST">
+            <legend><strong>Edit Location</strong></legend>
+            <fieldset>
+                <input type="hidden" value="{{Locations[0].location_id}}" id="location_id" name="location_id" required>
+
+                <label for="location_name"> Location Name</label>
+                <input type="text" value="{{Locations[0].location_name}}"  id="location_name" name="location_name" required>
+            </fieldset>
+
+            <input type="submit" value="Edit Location" name="edit_location" class="btn btn-primary">
+            <a href='/locations'><input class="btn" type="button" value="Cancel"></a>
+        </form>
+    </div>
+
+</html>
