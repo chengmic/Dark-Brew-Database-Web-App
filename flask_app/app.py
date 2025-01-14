@@ -20,16 +20,16 @@ from dotenv import load_dotenv, find_dotenv
 app = Flask(__name__)
 
 load_dotenv(find_dotenv())
-host = os.environ.get("340DBHOST")
-user = os.environ.get("340DBUSER")
-passwd = os.environ.get("340DBPW")
-db = os.environ.get("340DB")
+host = os.environ.get("DBHOST")
+user = os.environ.get("DBUSER")
+passwd = os.environ.get("DBPW")
+db = os.environ.get("DB")
 port = int(os.environ.get("MyPort"))
 
-app.config["MYSQL_HOST"] = os.environ.get("340DBHOST")
-app.config["MYSQL_USER"] = os.environ.get("340DBUSER")
-app.config["MYSQL_PASSWORD"] = os.environ.get("340DBPW")
-app.config["MYSQL_DB"] = os.environ.get("340DB")
+app.config["MYSQL_HOST"] = host
+app.config["MYSQL_USER"] = user
+app.config["MYSQL_PASSWORD"] = passwd
+app.config["MYSQL_DB"] = db
 app.config["MYSQL_PORT"] = port
 app.config["MYSQL_CURSORCLASS"] = "DictCursor" # To get results as a dictionary
 
