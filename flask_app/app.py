@@ -24,7 +24,7 @@ host = os.environ.get("340DBHOST")
 user = os.environ.get("340DBUSER")
 passwd = os.environ.get("340DBPW")
 db = os.environ.get("340DB")
-port = os.environ.get("MyPort")
+port = int(os.environ.get("MyPort"))
 
 app.config["MYSQL_HOST"] = os.environ.get("340DBHOST")
 app.config["MYSQL_USER"] = os.environ.get("340DBUSER")
